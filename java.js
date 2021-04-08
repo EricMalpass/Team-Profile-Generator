@@ -15,14 +15,15 @@ const promptUser = () => {
     ])
     .then ((data) => {
         const {role} = data;
-    if (role == 'Manager')
+    if (role === 'Manager'){
     createManager();
-    if (role == 'Engineer')
+    } else if (role == 'Engineer'){
     createEngineer();
-    if (role == 'Intern')
+    } else if (role == 'Intern') {
     createIntern();
-    if (role == 'no more team members')
+    } else {
     createTeam();
+    }
     })
 };
 
