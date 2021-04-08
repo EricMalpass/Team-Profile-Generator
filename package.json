@@ -1,0 +1,23 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "java.js",
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricMalpass/Team-Profile-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricMalpass/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/EricMalpass/Team-Profile-Generator#readme"
+}
