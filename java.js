@@ -7,19 +7,20 @@ const writeFileAsync = util.promisify(fs.writeFile);
 const promptUser = () => {
     return inquirer.prompt([
     {
-        type:'checkbox',
-        name: 'role',
-        choices: ['Manager', 'Engineer', 'Intern', 'no more team members'],
-        message: 'What is the team members role?',
+    type:'checkbox',
+    name: 'role',
+    choices: ['Manager', 'Engineer', 'Intern', 'no more team members'],
+    message: 'What is the team members role?',
     }
     ])
     .then ((data) => {
         const {role} = data;
+        console.log(role)
     if (role === 'Manager'){
     createManager();
     } else if (role == 'Engineer'){
     createEngineer();
-    } else if (role == 'Intern') {
+    } else if (role ==='Intern') {
     createIntern();
     } else {
     createTeam();
@@ -100,6 +101,9 @@ const createIntern = () => {
         }
     ]);
 }
+const createTeam = () => {
+    
+}
 
 const generateHTML = (data) => {
     `<!DOCTYPE html>
@@ -113,7 +117,7 @@ const generateHTML = (data) => {
     <body>
       <div class="jumbotron jumbotron-fluid">
       <div class="container">
-        <h1 class="display-4">Hi! Manager Name: ${data.name}</h1>
+        <h1 class="display-4">Manager Name: ${data.name}</h1>
         <h3>Example heading <span class="badge badge-secondary"></span></h3>
         <ul class="list-group">
           <li class="list-group-item">My GitHub username is ${data.github}</li>
@@ -129,9 +133,9 @@ const generateHTML = (data) => {
 
 const init = () => {
     promptUser()
-      .then((data) => writeFileAsync('index.html', generateHTML(data)))
-      .then(() => console.log('Successfully wrote to index.html'))
-      .catch((err) => console.error(err));
+      //.then((data) => writeFileAsync('index.html', generateHTML(data)))
+      //.then(() => console.log('Successfully wrote to index.html'))
+      //.catch((err) => console.error(err));
   };
 
   init();
