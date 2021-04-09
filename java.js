@@ -14,18 +14,21 @@ const promptUser = () => {
     }
     ])
     .then ((data) => {
-        const {role} = data;
-        console.log(role)
-    if (role == 'Manager'){
-    createManager();
-    } else if (role == 'Engineer'){
-    createEngineer();
-    } else if (role =='Intern') {
-    createIntern();
-    } else {
-    createTeam();
-    }
-    })
+    switch (data.role) {
+    case 'Manager':
+    createManager(data.role);
+    break;
+    case  'Engineer':
+    createEngineer(data.role);
+    break;
+    case  'Intern':
+    createIntern(data.role);
+    break;
+    case 'no more team members':
+    createTeam (data.role);
+    Defualt :
+    return text = "you must enter something"
+    }})
 };
 
 const createManager = () => {
