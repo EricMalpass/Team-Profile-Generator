@@ -16,11 +16,11 @@ const promptUser = () => {
     .then ((data) => {
         const {role} = data;
         console.log(role)
-    if (role === 'Manager'){
+    if (role == 'Manager'){
     createManager();
     } else if (role == 'Engineer'){
     createEngineer();
-    } else if (role ==='Intern') {
+    } else if (role =='Intern') {
     createIntern();
     } else {
     createTeam();
@@ -52,6 +52,7 @@ const createManager = () => {
         message: 'What the their email address?',
         }
     ]);
+    promptUser()
 }
 const createEngineer = () => {
     return inquirer.prompt([
@@ -101,9 +102,12 @@ const createIntern = () => {
         }
     ]);
 }
-const createTeam = () => {
-    
-}
+//const createTeam = () => {
+    //for (let i = 0; i < data.length; index++) {
+     //   const employee = data[i];
+    //    generateHTML (data[i])
+  //  }
+//}
 
 const generateHTML = (data) => {
     `<!DOCTYPE html>
