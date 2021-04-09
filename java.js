@@ -7,18 +7,22 @@ const writeFileAsync = util.promisify(fs.writeFile);
 const promptUser = () => {
     return inquirer.prompt([
     {
-    type:'checkbox',
+    type:'list',
     name: 'role',
     choices: ['Manager', 'Engineer', 'Intern', 'no more team members'],
     message: 'What is the team members role?',
     }
     ])
     .then ((data) => {
+        console.log(data.role);
     switch (data.role) {
-    case 'Manager':
-    createManager(data.role);
+    
+    case ['Manager']:
+        console.log(data.role);
+    createManager();
     break;
     case  'Engineer':
+        console.log(data.role);
     createEngineer(data.role);
     break;
     case  'Intern':
