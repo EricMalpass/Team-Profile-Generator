@@ -1,37 +1,45 @@
-## Welcome to GitHub Pages
+# Team-Profile-Generator
 
-You can use the [editor on GitHub](https://github.com/EricMalpass/Team-Profile-Generator/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Objective: 
+GIVEN a command-line application that accepts user input
+WHEN I am prompted for my team members and their information
+THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+WHEN I click on an email address in the HTML
+THEN my default email program opens and populates the TO field of the email with the address
+WHEN I click on the GitHub username
+THEN that GitHub profile opens in a new tab
+WHEN I start the application
+THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
+WHEN I enter the team manager’s name, employee ID, email address, and office number
+THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
+WHEN I select the engineer option
+THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
+WHEN I select the intern option
+THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
+WHEN I decide to finish building my team
+THEN I exit the application, and the HTML is generated
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![Screenshots](./screenshot.PNG)
 
-### Markdown
+Repo:
+https://github.com/EricMalpass/Team-Profile-Generator
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Website:
+https://ericmalpass.github.io/Team-Profile-Generator/
 
-```markdown
-Syntax highlighted code block
+Video example:
+Check out this video I recorded with Screencastify:https://drive.google.com/file/d/1m-0Zoy_FXQdu5jn12XNk_zYfbsvQqUPv/view
 
-# Header 1
-## Header 2
-### Header 3
+I recieve alot of support from my study group, tutur, askbcs tuturs, and various websites:
 
-- Bulleted
-- List
+Study Group:
 
-1. Numbered
-2. List
+-Li Hua Anderson
 
-**Bold** and _Italic_ and `Code` text
+-Sam Oberg
 
-[Link](url) and ![Image](src)
-```
+-Kelly Dean Mahaffey
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Tutur
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/EricMalpass/Team-Profile-Generator/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+-Quint Turner
