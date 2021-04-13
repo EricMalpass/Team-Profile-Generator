@@ -1,152 +1,228 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
-const util = require('util');
+const inquirer = require("inquirer");
+const fs = require("fs");
 
-const writeFileAsync = util.promisify(fs.writeFile);
+const Engineer = require("./libary/engineer");
+const Intern = require("./libary/intern");
+const Manager = require("./libary/manager");
 
-const promptUser = () => {
-    return inquirer.prompt([
-    {
-    type:'list',
-    name: 'role',
-    choices: ['Manager', 'Engineer', 'Intern', 'no more team members'],
-    message: 'What is the team members role?',
-    }
-    ])
-    .then ((data) => {
-        console.log(data.role);
-    switch (data.role) {
-    
-    case ['Manager']:
-        console.log(data.role);
-    createManager();
-    break;
-    case  'Engineer':
-        console.log(data.role);
-    createEngineer(data.role);
-    break;
-    case  'Intern':
-    createIntern(data.role);
-    break;
-    case 'no more team members':
-    createTeam (data.role);
-    Defualt :
-    return text = "you must enter something"
-    }})
+let finalTeamEngineer = [];
+let finalTeamManager = [];
+let finalTeamIntern = [];
+
+function addMember() {
+    const question = [
+        {
+            type: "list",
+            name: "addNew",
+            message: "Would you like to add another member to the team? If so, please select the type of team member.",
+            choices: ["Manager", "Engineer", "Intern", "NO more team members to add"]
+        },
+    ];
+
+    return inquirer.prompt(question).then(response => {
+        switch (response.addNew) {
+            case "Manager":
+                managerQuestions();
+                break;
+            case "Engineer":
+                engineerQuestions();
+                break;
+            case "Intern":
+                internQuestions();
+                break;
+            default:
+                createPage();
+        };
+    });
 };
 
-const createManager = () => {
-    return inquirer.prompt([
+function managerQuestions() {
+    const questions = [
         {
-        type: 'input',
-        name: 'name',
-        message: 'What is the managers name?',  
-        }
-        ,
-        {
-        type: 'input',
-        name: 'employee ID',
-        message: 'What the their ID?',
+            type: "input",
+            name: "managerName",
+            message: "Please enter the Manager's name."
         },
         {
-        type: 'input',
-        name: 'location',
-        message: 'What the their office location?',
+            type: "input",
+            name: "managerId",
+            message: "Please enter the Manager's employee ID number."
         },
         {
-        type: 'input',
-        name: 'email',
-        message: 'What the their email address?',
-        }
-    ]);
-    promptUser()
-}
-const createEngineer = () => {
-    return inquirer.prompt([
-        {
-        type: 'input',
-        name: 'name',
-        message: 'What is the their name?',  
+            type: "input",
+            name: "managerEmail",
+            message: "Please enter the Manager's email address."
         },
         {
-        type: 'input',
-        name: 'id',
-        message: 'What the their ID?',
+            type: "input",
+            name: "managerOffice",
+            message: "Please enter the Manager's office phone number."
         },
-        {
-        type: 'input',
-        name: 'github',
-        message: 'What the their github?',
-        },
-        {
-        type: 'input',
-        name: 'email',
-        message: 'What the their email address?',
-        }
-    ]);
-}
-const createIntern = () => {
-    return inquirer.prompt([
-        {
-        type: 'input',
-        name: 'name',
-        message: 'What is the their name?',  
-        },
-        {
-        type: 'input',
-        name: 'employee ID',
-        message: 'What the their ID?',
-        },
-        {
-        type: 'input',
-        name: 'email',
-        message: 'What the their email address?',
-        },
-        {
-        type: 'input',
-        name: 'school',
-        message: 'What school do they/did they attend?',
-        }
-    ]);
-}
-//const createTeam = () => {
-    //for (let i = 0; i < data.length; index++) {
-     //   const employee = data[i];
-    //    generateHTML (data[i])
-  //  }
-//}
+    ];
+    return inquirer.prompt(questions).then(response => {
+        const manager = new Manager(
+            response.managerName,
+            response.managerId,
+            response.managerEmail,
+            response.managerOffice
+        );
 
-const generateHTML = (data) => {
-    `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <title>Document</title>
-    </head>
-    <body>
-      <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Manager Name: ${data.name}</h1>
-        <h3>Example heading <span class="badge badge-secondary"></span></h3>
-        <ul class="list-group">
-          <li class="list-group-item">My GitHub username is ${data.github}</li>
-          <li class="list-group-item"> ID# ${data.id}</li>
-          <li class="list-group-item"> office location: ${data.location}</li>
-          <li class="list-group-item"> Email address: ${data.email}</li>
-        </ul>
-      </div>
-    </div>
-    </body>
-    </html>`;
-}
+        finalTeamManager.push(manager);
+        addMember();
+    });
+};
+managerQuestions();
 
-const init = () => {
-    promptUser()
-      //.then((data) => writeFileAsync('index.html', generateHTML(data)))
-      //.then(() => console.log('Successfully wrote to index.html'))
-      //.catch((err) => console.error(err));
-  };
+function engineerQuestions() {
+    const questions = [
+        {
+            type: "input",
+            name: "engineerName",
+            message: "Please enter the Engineer's name."
+        },
+        {
+            type: "input",
+            name: "engineerId",
+            message: "Please enter the Engineer's employee ID number."
+        },
+        {
+            type: "input",
+            name: "engineerEmail",
+            message: "Please enter the Engineer's email address."
+        },
+        {
+            type: "input",
+            name: "engineerGitHub",
+            message: "Please enter the Engineer's GitHub username."
+        }
+    ];
+    return inquirer.prompt(questions).then(response => {
+        const engineer = new Engineer(
+            response.engineerName,
+            response.engineerId,
+            response.engineerEmail,
+            response.engineerGitHub
+        );
 
-  init();
+        finalTeamEngineer.push(engineer);
+        addMember();
+    });
+};
+function internQuestions() {
+    const questions = [
+        {
+            type: "input",
+            name: "internName",
+            message: "Please enter the Intern's name."
+        },
+        {
+            type: "input",
+            name: "internId",
+            message: "Please enter the Intern's employee ID number."
+        },
+        {
+            type: "input",
+            name: "internEmail",
+            message: "Please enter the Intern's email address."
+        },
+        {
+            type: "input",
+            name: "internSchool",
+            message: "Please enter the school that the Intern is attending or attended."
+        },
+    ];
+    return inquirer.prompt(questions).then(response => {
+        const intern = new Intern(
+            response.internName,
+            response.internId,
+            response.internEmail,
+            response.internSchool
+        );
+
+        finalTeamIntern.push(intern);
+        addMember();
+    });
+};
+
+function createPage() {
+    fs.writeFile("index.html", `
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <title>Team Profile Generator</title>
+</head>
+<body>
+    <main>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Your awesome Team Profile</h1>
+              </div>
+              ${createCardManager()}
+              ${createCardEngineer()}
+              ${createCardIntern()}
+          </div>
+    </main>
+</body>
+</html>`, err => {
+        if (err) throw err;
+    });
+};
+
+function createCardEngineer() {
+    let team = ""
+    for (let i = 0; i < finalTeamEngineer.length; i++) {
+        team += `
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h3 class="card-title">${finalTeamEngineer[i].name}</h3>
+                <h4 class="card-subtitle"><i class="fas fa-mug-hot">${finalTeamEngineer[i].role}</i></h4>
+                <p>ID: ${finalTeamEngineer[i].id}</p>
+                <p>Email: ${finalTeamEngineer[i].email}</p>
+                <a>GitHub Profile: ${finalTeamEngineer[i].github}</a>
+            </div>
+        </div>
+        `
+    };
+    return team;
+};
+
+function createCardManager() {
+    let team = ""
+    for (let i = 0; i < finalTeamManager.length; i++) {
+        team += `
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h3 class="card-title">${finalTeamManager[i].name}</h3>
+                <h4 class="card-subtitle"><i class="fas fa-mug-hot">${finalTeamManager[i].role}</i></h4>
+                <p>ID: ${finalTeamManager[i].id}</p>
+                <a mailto="${finalTeamManager[i].email}">Email address:${finalTeamManager[i].email}</a>
+                <p>Office Number: ${finalTeamManager[i].officeNumber}</p>
+            </div>
+        </div>
+        `
+    };
+    return team;
+};
+
+function createCardIntern() {
+    let team = ""
+    for (let i = 0; i < finalTeamIntern.length; i++) {
+        team += `
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h3 class="card-title">${finalTeamIntern[i].name}</h3>
+                <h4 class="card-subtitle"><i class="fas fa-mug-hot">${finalTeamIntern[i].role}</i></h4>
+                <p>ID: ${finalTeamIntern[i].id}</p>
+                <p>Email: ${finalTeamIntern[i].email}</p>
+                <p>School: ${finalTeamIntern[i].school}</p>
+            </div>
+        </div>
+        `
+    };
+    return team;
+};
